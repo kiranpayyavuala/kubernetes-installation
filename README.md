@@ -59,7 +59,7 @@ mysql -u root -ppassword
 CREATE DATABASE wordpress;
 
 
-kubectl apply -f manifests/wordpress-datavolume-claim.yaml
+kubectl apply -f wordpress-datavolume-claim.yaml
 kubectl apply -f wordpress-deployment.yaml
 
 kubectl apply -f DO-loadbalancer.yaml
