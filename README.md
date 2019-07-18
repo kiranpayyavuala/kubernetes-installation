@@ -1,4 +1,5 @@
-<--------Setup Kubernetes Cluster on AWS-------->
+<----------------------Setup Kubernetes Cluster on AWS--------------------------->
+----------------------------------------------------------------------------------
 
 curl https://s3.amazonaws.com/aws-cli/awscli-bundle.zip -o awscli-bundle.zip
 
@@ -29,23 +30,25 @@ sudo mv kops-linux-amd64 /usr/local/bin/kops
  
 ---------------------------------------------------------------------------------------
 
-aws s3 mb s3://dev.k8s.kubernetes.in
+aws s3 mb s3://dev.k8s.kopscluster.in
  
-export KOPS_STATE_STORE=s3://dev.k8s.kubernetes.in
+export KOPS_STATE_STORE=s3://dev.k8s.kopscluster.in
+
 ---------------------------------------------------------------------------------------- 
 ssh-keygen
 
 <----------Create kubernetes cluser---------->
 
-kops create cluster --cloud=aws --zones=us-west-2c --name=dev.k8s.kubernetes.in --dns-zone=kubernetes.in --dns private
+kops create cluster --cloud=aws --zones=us-west-2c --name=dev.k8s.kopscluster.in --dns-zone=kopscluster.in --dns private
 
-kops update cluster dev.k8s.kubernetes.in --yes
+kops update cluster dev.k8s.kopscluster.in --yes
 
 kops validate cluster
 
 kubectl get nodes 
 
-<----------Deploying Nginx container on Kubernetes---------->
+<------------------Deploying Nginx container on Kubernetes------------------->
+------------------------------------------------------------------------------
 
 kubectl run sample-nginx --image=nginx --replicas=2 --port=80
 
@@ -58,6 +61,11 @@ kubectl expose deployment sample-nginx --port=80 --type=LoadBalancer
 kubectl get services -o wide
 
 <----------Deploying Wordpress Web Application with MySQL in Kubernetes--------->
+---------------------------------------------------------------------------------
+
+git clone https://github.com/kiranpayyavuala/kubernetes.git
+
+cd kubernetes
 
 kubectl create secret generic mysql-pass --from-literal=password=password
 
@@ -90,4 +98,6 @@ kubectl apply -f DO-loadbalancer.yaml
 
 kubectl get services
 
-kops delete cluster dev.k8s.ku.in --yes
+<-------------------------Deleting Kubernetes cluster------------------------->
+------------------------------------------------------------------------------
+kops delete cluster dev.k8s.kopscluster.in --yes
