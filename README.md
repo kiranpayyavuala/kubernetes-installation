@@ -1,4 +1,4 @@
-                       Setup Kubernetes Cluster on AWS
+                             #Setup Kubernetes Cluster on AWS
 ---------------------------------------------------------------------------------
 ```
 curl https://s3.amazonaws.com/aws-cli/awscli-bundle.zip -o awscli-bundle.zip
@@ -48,7 +48,7 @@ kops validate cluster
 
 kubectl get nodes 
 ```
-<------------------Deploying Nginx container on Kubernetes------------------->
+                            Deploying Nginx container on Kubernetes
 ------------------------------------------------------------------------------
 ```
 kubectl run sample-nginx --image=nginx --replicas=2 --port=80
@@ -61,7 +61,7 @@ kubectl expose deployment sample-nginx --port=80 --type=LoadBalancer
 
 kubectl get services -o wide
 ```
-<--------Deploying Wordpress Web Application with MySQL in Kubernetes------->
+                      Deploying Wordpress Web Application with MySQL in Kubernetes
 -----------------------------------------------------------------------------
 ```
 git clone https://github.com/kiranpayyavuala/kubernetes.git
@@ -99,7 +99,7 @@ kubectl apply -f DO-loadbalancer.yaml
 
 kubectl get services
 ```
-<-------------------------Deleting Kubernetes cluster------------------------->
+                                      Deleting Kubernetes cluster
 ------------------------------------------------------------------------------
 ```
 kops delete cluster dev.k8s.kopscluster.in --yes
