@@ -35,7 +35,7 @@ export KOPS_STATE_STORE=s3://dev.k8s.kopscluster.in
 ```
 ssh-keygen
 
-                                                  Create kubernetes cluser
+                                               Create kubernetes cluser
 
 kops create cluster --cloud=aws --zones=us-west-2c --name=dev.k8s.kopscluster.in --dns-zone=kopscluster.in --dns private
 
