@@ -32,7 +32,8 @@ ssh-keygen
 ```
 kops create cluster --cloud=aws --zones=us-west-2c --name=dev.k8s.dominar.in --dns-zone=dominar.in --dns private
 ```
-                                                 or
+
+							or
 ```
 kops create cluster \
      --name=dev.dominar.in \
@@ -46,11 +47,8 @@ kops create cluster \
                                                     For edit cluster
 						    ----------------
 kops edit cluster 
-
 kops update cluster dev.k8s.dominar.in --yes
-
 kops validate cluster
-
 kubectl get nodes 
 ```
 
