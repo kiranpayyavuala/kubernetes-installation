@@ -2,11 +2,8 @@
 					  --------------------------------
 ```
 curl https://s3.amazonaws.com/aws-cli/awscli-bundle.zip -o awscli-bundle.zip
-
 apt install unzip python
-
 unzip awscli-bundle.zip
-
 ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 
 aws configure
@@ -14,17 +11,13 @@ aws configure
 ---------------------------------------------------------------------------------------------------------------------------
 ```
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-
 chmod +x ./kubectl
-
 sudo mv ./kubectl /usr/local/bin/kubectl
 ```
 
- ```
+```
 curl -LO https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
-
 chmod +x kops-linux-amd64
-
 sudo mv kops-linux-amd64 /usr/local/bin/kops
  ```
 
@@ -37,7 +30,7 @@ ssh-keygen
                                                Create kubernetes cluser
 					       ------------------------
 ```
-kops create cluster --cloud=aws --zones=us-west-2c --name=dev.k8s.kopscluster.in --dns-zone=kopscluster.in --dns private
+kops create cluster --cloud=aws --zones=us-west-2c --name=dev.k8s.dominar.in --dns-zone=dominar.in --dns private
 ```
                                                  or
 ```
@@ -54,7 +47,7 @@ kops create cluster \
 						    ----------------
 kops edit cluster 
 
-kops update cluster dev.k8s.kopscluster.in --yes
+kops update cluster dev.k8s.dominar.in --yes
 
 kops validate cluster
 
@@ -115,6 +108,6 @@ kubectl get services
                                                Deleting Kubernetes cluster
 					       ---------------------------
 ```
-kops delete cluster dev.k8s.kopscluster.in --yes
+kops delete cluster dev.k8s.dominar.in --yes
 
 ```
