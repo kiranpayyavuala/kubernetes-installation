@@ -19,7 +19,7 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 curl -LO https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
 chmod +x kops-linux-amd64
 sudo mv kops-linux-amd64 /usr/local/bin/kops
- ```
+```
 
 ```
 aws s3 mb s3://dev.k8s.kopscluster.in
@@ -28,7 +28,7 @@ ssh-keygen
 ```
 
                                                Create kubernetes cluser
-					          ------------------------
+					       ------------------------
 ```
 kops create cluster --cloud=aws --zones=us-west-2c --name=dev.k8s.dominar.in --dns-zone=dominar.in --dns private
 ```
@@ -42,17 +42,16 @@ kops create cluster \
      --node-count="2" \
      --dns-zone=dominar.in \
      --dns=private
-
+```
                                                     For edit cluster
-						       ----------------
+```						    ----------------
 kops edit cluster 
 kops update cluster dev.k8s.dominar.in --yes
 kops validate cluster
 kubectl get nodes 
 ```
-
                                           Deploying Nginx container on Kubernetes
-					     ---------------------------------------
+					  ---------------------------------------
 ```
 kubectl run sample-nginx --image=nginx --replicas=2 --port=80
 
@@ -65,7 +64,7 @@ kubectl expose deployment sample-nginx --port=80 --type=LoadBalancer
 kubectl get services -o wide
 ```
                                 Deploying Wordpress Web Application with MySQL in Kubernetes
-				   -----------------------------------------------------------
+			        -----------------------------------------------------------
 ```
 git clone https://github.com/kiranpayyavuala/kubernetes.git
 
@@ -103,7 +102,7 @@ kubectl apply -f DO-loadbalancer.yaml
 kubectl get services
 ```
                                                Deleting Kubernetes cluster
-					          ---------------------------
+					       ---------------------------
 ```
 kops delete cluster dev.k8s.dominar.in --yes
 
