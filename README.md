@@ -30,10 +30,18 @@ sudo mv kops-linux-amd64 /usr/local/bin/kops
 ```
 aws s3 mb s3://dominar.in
 export KOPS_STATE_STORE=s3://dominar.in
+```
+                                            #Delete S3 bucket
+```
+aws s3 rb s3://dominar.in
+
+```
+
+```
 ssh-keygen
 ```
 
-                                               #Create kubernetes cluser
+                                            #Create kubernetes cluser
 ```
 kops create cluster --cloud=aws --zones=us-west-2c --name=dominar.in --dns-zone=dominar.in --dns private
 ```
@@ -60,7 +68,7 @@ kops validate cluster
 kubectl get nodes 
 ```
 
-                                                  #To connect Master or node
+                                            #To connect Master or node
 ```
 ssh -i .ssh/id_rsa admin@Master_ip
 ssh -i .ssh/id_rsa admin@Node_ip
