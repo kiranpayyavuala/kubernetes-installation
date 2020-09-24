@@ -1,9 +1,16 @@
                                           #Setup Kubernetes Cluster on AWS
 ```
+sudo apt update
+sudo apt -y upgrade
+
 curl https://s3.amazonaws.com/aws-cli/awscli-bundle.zip -o awscli-bundle.zip
 apt install unzip python
 unzip awscli-bundle.zip
 ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+           (or)
+
+sudo apt-get install awscli -y
+aws --version
 
 aws configure
 ```
@@ -21,19 +28,19 @@ sudo mv kops-linux-amd64 /usr/local/bin/kops
 ```
 
 ```
-aws s3 mb s3://dev.k8s.kopscluster.in
-export KOPS_STATE_STORE=s3://dev.k8s.kopscluster.in
+aws s3 mb s3://dominar.in
+export KOPS_STATE_STORE=s3://dominar.in
 ssh-keygen
 ```
 
                                                #Create kubernetes cluser
 ```
-kops create cluster --cloud=aws --zones=us-west-2c --name=dev.k8s.dominar.in --dns-zone=dominar.in --dns private
+kops create cluster --cloud=aws --zones=us-west-2c --name=dominar.in --dns-zone=dominar.in --dns private
 ```
 or
 ```
 kops create cluster \
-     --name=dev.dominar.in \
+     --name=dominar.in \
      --zones=us-east-1a \
      --master-size="t2.medium" \
      --node-size="t2.medium" \
@@ -41,14 +48,26 @@ kops create cluster \
      --dns-zone=dominar.in \
      --dns=private
 ```
-                                                    #For edit cluster
+or
+```
+kops create cluster   --cloud=aws       --zones=us-east-2a,us-east-2b      --name=kopscluster.in       --master-size="t2.micro"       --node-size="t2.micro"       --node-count="2"       --dns-zone=kopscluster.in       --dns private
+```
+                                          #For edit cluster(Config) and Update cluster
 ```						    
 kops edit cluster 
-kops update cluster dev.k8s.dominar.in --yes
+kops update cluster dominar.in --yes
 kops validate cluster
 kubectl get nodes 
 ```
-                                         # Deploying Nginx container on Kubernetes
+
+                                                  #To connect Master or node
+```
+ssh -i .ssh/id_rsa admin@Master_ip
+ssh -i .ssh/id_rsa admin@Node_ip
+```
+
+
+                                             # Deploying Nginx container on Kubernetes
 					  
 ```
 kubectl run sample-nginx --image=nginx --replicas=2 --port=80
@@ -102,6 +121,6 @@ kubectl get services
                                                #Deleting Kubernetes cluster
 					       
 ```
-kops delete cluster dev.k8s.dominar.in --yes
+kops delete cluster dominar.in --yes
 
 ```
