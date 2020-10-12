@@ -126,7 +126,11 @@ kubectl apply -f DO-loadbalancer.yaml
 
 kubectl get services
 ```
-                                               #Deleting Kubernetes cluster
+                                 #Remove all the deployment
+```
+kubectl delete daemonsets,replicasets,services,deployments,pods,rc --all
+````
+                                 #Deleting Kubernetes cluster
 					       
 ```
 kops delete cluster dominar.in --yes
