@@ -96,11 +96,11 @@ kops create cluster \
      --name=dominar.in \
      --zones=us-east-1a,us-east-1b \
      --master-size="t2.medium" \
-	 --master-zones=us-east-1a,us-east-1b,us-east-1f \
+     --master-zones=us-east-1a,us-east-1b,us-east-1f \
      --node-size="t2.medium" \
      --node-count="2" \
-	 --master-count 3 \
-	 --ssh-public-key ~/.ssh/id_rsa.pub \
+     --master-count 3 \
+     --ssh-public-key ~/.ssh/id_rsa.pub \
      --dns-zone=dominar.in \
      --dns=private
 ```
@@ -175,7 +175,7 @@ ssh -i .ssh/id_rsa admin@Master_ip
 ssh -i .ssh/id_rsa admin@Node_ip
 ```
 
-                                   ###Deploying Nginx container on Kubernetes
+###Deploying Nginx container on Kubernetes
 					  
 ```
 kubectl run sample-nginx --image=nginx --replicas=2 --port=80
@@ -189,7 +189,7 @@ kubectl expose deployment sample-nginx --port=80 --type=LoadBalancer
 kubectl get services -o wide
 ```
 
-                            ###Deploying Wordpress Web Application with MySQL in Kubernetes
+##Deploying Wordpress Web Application with MySQL in Kubernetes
 			        
 # Infrastructure Diagram:
 On the left is a traditional diagram for this 3-tier web application. On the right, you see how each part of that infrastructure maps to kubernetes concepts.
@@ -259,23 +259,21 @@ Grab the load balancer's external IP here:
 ````
 kubectl get services
 ```
-
 You can also see this in aws console EC2--> loadbalancer and take the Record name
-
-
-
-                                   #Remove all the deployment
+```
+                          #Remove all the deployment
+```
 ```
 kubectl delete daemonsets,replicasets,services,deployments,pods,rc --all
 ````
 
-                                       #Delete S3 bucket
+   #Delete S3 bucket
 ```
 aws s3 rb s3://dominar.in
 
 ```
 
-                                   #Deleting Kubernetes cluster
+   #Deleting Kubernetes cluster
 					       
 ```
 kops delete cluster dominar.in --yes
